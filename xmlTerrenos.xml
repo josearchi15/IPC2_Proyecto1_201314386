@@ -67,7 +67,7 @@
 		<posicion x="5" y="2">1</posicion>
 		<posicion x="5" y="3">1</posicion>
 		<posicion x="5" y="4">1</posicion>
-		<posicion x="5" y="5">1</posicion>
+		<posicion x="5" y="5">200</posicion>
 	</terreno>
 		<terreno nombre="terreno3">
 		<posicioninicio>
@@ -102,6 +102,6 @@
 		<posicion x="5" y="2">1</posicion>
 		<posicion x="5" y="3">1</posicion>
 		<posicion x="5" y="4">1</posicion>
-		<posicion x="5" y="5">1</posicion>
+		<posicion x="5" y="5">300</posicion>
 	</terreno>
 </terrenos>

@@ -23,19 +23,7 @@ for terreno in root:
             for p in el:
                 labelEnd += p.text+","
             print(labelEnd)
-        else:
-            if int(el.attrib.get("x")) == xCurrent:
-                xLine.append(int(el.text))
-                # print(int(el.attrib.get("x")),"--->",xCurrent)
-                # print(el.attrib.get("x"),el.attrib.get("y"))
-                # print("x = current")
-            else:
-                print("________________________________",xLine)
-                tab.addY(xLine)
-                xLine.clear()
-                # print("________________________________",xLine)
-                xLine.append(int(el.text))
-                xCurrent+=1
-                print(int(el.attrib.get("x")),"--->",xCurrent)
-            
-        tab.show()
+        elif el.tag == "posicion":
+            print(el.get("x"),",",el.get("y"),"=",el.text)
+            xLine.append(int(el.text))
+        print(xLine)
