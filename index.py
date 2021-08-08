@@ -7,9 +7,9 @@ for terreno in root:
     print(terreno.get("nombre"))
     xCurrent = 1
     xLine = list()
+    tab = Tablero()
 
     for el in terreno:
-        tab = Tablero()
 
 
         if el.tag == "posicioninicio":
@@ -23,7 +23,14 @@ for terreno in root:
             for p in el:
                 labelEnd += p.text+","
             print(labelEnd)
-        elif el.tag == "posicion":
-            print(el.get("x"),",",el.get("y"),"=",el.text)
-            xLine.append(int(el.text))
-        print(xLine)
+        else:
+            if int(el.attrib.get("x")) == xCurrent:
+                xLine.append(int(el.text))
+            else:
+                tab.addY(xLine)
+                xLine = []
+                xLine.append(int(el.text))
+                xCurrent+=1
+
+    tab.show()
+    print("\n")
