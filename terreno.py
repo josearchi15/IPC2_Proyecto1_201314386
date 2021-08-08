@@ -14,19 +14,25 @@ class Terreno:
             "value":value
         })
 
-    def showTablero(self):
-        sizeX = 0
-        sizeY = 0
+    def size(self):
+        dimensions = {
+            "x":0,
+            "y":0
+        }
         for dic in self.tablero:
             if dic["x"]=="1":
-                sizeY+=1
+                dimensions["y"]+=1
         for dic in self.tablero:
             if dic["y"]=="1":
-                sizeX+=1
+                dimensions["x"]+=1
+        return dimensions        
+
+    def showTablero(self):
+        dims = self.size()
+        # print(dims["x"],dims["y"])
         
         lineX =""
         for point in self.tablero:
             if point["y"]=="1":
                 lineX+= str(point["value"])+"|"
-        # print(sizeX,sizeY)
         print(lineX)
