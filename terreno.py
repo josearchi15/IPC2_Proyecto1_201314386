@@ -30,9 +30,11 @@ class Terreno:
     def showTablero(self):
         dims = self.size()
         # print(dims["x"],dims["y"])
-        
-        lineX =""
-        for point in self.tablero:
-            if point["y"]=="1":
-                lineX+= str(point["value"])+"|"
-        print(lineX)
+
+        for y in range(1,int(dims["y"])+1,1):
+            lineX ="| "
+            for x in range(1,int(dims["x"])+1,1):
+                for point in self.tablero:
+                    if point["x"]==str(x) and point["y"]==str(y):
+                        lineX+= str(point["value"])+" | "
+            print(lineX)
