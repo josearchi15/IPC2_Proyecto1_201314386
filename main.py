@@ -21,6 +21,6 @@ def procesesarArchivo(file):
         print(terreno.nombre," ha sido guardado")
         terreno.showTablero()
 
-procesesarArchivo('xmlEntrada.xml')
+# procesesarArchivo('xmlEntrada.xml')
 # filee = open(r'''C:\\Users\\archi\\Downloads\\Entrada.xml''')
 # procesesarArchivo(filee)

@@ -1,4 +1,4 @@
-
+from main import procesesarArchivo
 while(True):
     print("\n")
     print("Menu principal:")
@@ -13,7 +13,8 @@ while(True):
 
     if opcion == 1:
         print("\n")
-        print("Ingrese ruta del archivo.")
+        file = input("Ingrese ruta del archivo.")
+        procesesarArchivo(file)
     elif opcion == 2:
         print("\n")
         print("Procesando archivo.")
