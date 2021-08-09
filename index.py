@@ -1,36 +1,34 @@
-from tablero import Tablero
-import xml.etree.ElementTree as ET
-tree = ET.parse('xmlTerrenos.xml')
-root = tree.getroot()
 
-for terreno in root:
-    print(terreno.get("nombre"))
-    xCurrent = 1
-    xLine = list()
-    tab = Tablero()
-
-    for el in terreno:
-
-
-        if el.tag == "posicioninicio":
-            labelStart = "pIncial: "
-            for p in el:
-                labelStart += p.text+","
-            print(labelStart)
-
-        elif el.tag == "posicionfin":
-            labelEnd = "pFin: "
-            for p in el:
-                labelEnd += p.text+","
-            print(labelEnd)
-        else:
-            if int(el.attrib.get("x")) == xCurrent:
-                xLine.append(int(el.text))
-            else:
-                tab.addY(xLine)
-                xLine = []
-                xLine.append(int(el.text))
-                xCurrent+=1
-
-    tab.show()
+while(True):
     print("\n")
+    print("Menu principal:")
+    print("    1. Cargar archivo")
+    print("    2. Procesar archivo")
+    print("    3. Escribir archivo de salida")
+    print("    4. Mostrar datos del estudiante")
+    print("    5. Generar grafica")
+    print("    6. Salir")
+    
+    opcion = int(input("Ingrese opcion: "))
+
+    if opcion == 1:
+        print("\n")
+        print("Ingrese ruta del archivo.")
+    elif opcion == 2:
+        print("\n")
+        print("Procesando archivo.")
+    elif opcion == 3:
+        print("\n")
+        print("Escribiendo archivo de salida.")
+    elif opcion == 4:
+        print("\n")
+        print("Jose Carlos Archila Galicia")
+        print("201314386")
+        print("Introducción a la programación y computación 2 sección A")
+        print("Ingeniería en ciencias y sistemas")
+        print("4to semestre")
+    elif opcion == 5:
+        print("\n")
+        print("Generando grafica")
+    else:
+        break
