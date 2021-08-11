@@ -31,7 +31,7 @@ class Terreno:
         dims = self.size()
         # print(dims["x"],dims["y"])
 
-        for y in range(1,int(dims["y"])+1,1):
+        for y in range(int(dims["y"]),0,-1):
             lineX ="| "
             for x in range(1,int(dims["x"])+1,1):
                 for point in self.tablero:
