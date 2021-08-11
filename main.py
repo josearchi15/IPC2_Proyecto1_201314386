@@ -22,5 +22,5 @@ def procesesarArchivo(file):
         terreno.showTablero()
 
 # procesesarArchivo('xmlEntrada.xml')
-# filee = open(r'''C:\\Users\\archi\\Downloads\\Entrada.xml''')
+# filee = open("C:\\Users\\archi\Downloads\Entrada.xml","r")
 # procesesarArchivo(filee)
