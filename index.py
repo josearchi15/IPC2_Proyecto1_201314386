@@ -1,11 +1,11 @@
-from main import procesesarArchivo
+import main
 
-file = ""
+
 while(True):
     print("\n")
     print("Menu principal:")
     print("    1. Cargar archivo")
-    print("    2. Procesar archivo")
+    print("    2. Procesar terreno")
     print("    3. Escribir archivo de salida")
     print("    4. Mostrar datos del estudiante")
     print("    5. Generar grafica")
@@ -14,11 +14,13 @@ while(True):
     opcion = int(input("Ingrese opcion: "))
     if opcion == 1:
         print("\n")
-        file = input("Ingrese el nombre/ruta del archivo.")
+        file = input("Ingrese el nombre/ruta del archivo. ")
+        main.procesesarArchivo(file)
     elif opcion == 2:
         print("\n")
-        print("Procesando archivo.", file)
-        procesesarArchivo(file)
+        print("Procesando archivo. ")
+        print("Terrenos disponibles para procesar:")
+        main.mostrarLista(main.listaTerrenos)
     elif opcion == 3:
         print("\n")
         print("Escribiendo archivo de salida.")
