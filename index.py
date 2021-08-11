@@ -1,4 +1,6 @@
 from main import procesesarArchivo
+
+file = ""
 while(True):
     print("\n")
     print("Menu principal:")
@@ -10,14 +12,13 @@ while(True):
     print("    6. Salir")
     
     opcion = int(input("Ingrese opcion: "))
-
     if opcion == 1:
         print("\n")
-        file = input("Ingrese ruta del archivo.")
-        procesesarArchivo(file)
+        file = input("Ingrese el nombre/ruta del archivo.")
     elif opcion == 2:
         print("\n")
-        print("Procesando archivo.")
+        print("Procesando archivo.", file)
+        procesesarArchivo(file)
     elif opcion == 3:
         print("\n")
         print("Escribiendo archivo de salida.")
