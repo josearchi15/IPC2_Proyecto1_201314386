@@ -22,14 +22,14 @@ def procesesarArchivo(file):
                 # print(el.get("x"), el.get("y"),"-->",el.text)
                 terreno.fillTablero(el.get("x"), el.get("y"), int(el.text))
         print(terreno.nombre," ha sido guardado")
-        # terreno.showTablero()
+        terreno.showTablero()
         listaTerrenos.agregar(terreno)
 
 def mostrarLista(lista):
     actual = lista.cabeza
     index = 1
     while actual != None:
-        print("-", actual.dato.nombre)
+        print("  -", actual.dato.nombre)
         index += 1
         actual = actual.siguiente
 
