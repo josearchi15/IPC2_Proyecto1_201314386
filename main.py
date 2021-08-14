@@ -22,7 +22,7 @@ def procesesarArchivo(file):
                 # print(el.get("x"), el.get("y"),"-->",el.text)
                 terreno.fillTablero(el.get("x"), el.get("y"), int(el.text))
         print(terreno.nombre," ha sido guardado")
-        terreno.showTablero()
+        # terreno.showTablero()
         listaTerrenos.agregar(terreno)
 
 def mostrarLista(lista):
@@ -33,7 +33,16 @@ def mostrarLista(lista):
         index += 1
         actual = actual.siguiente
 
+def buscarNodo(lista, nombre):
+    actual = lista.cabeza
+    while actual != None:
+        if actual.dato.nombre == nombre:
+            return print("Encontrado",actual.dato.nombre)
+        actual = actual.siguiente
 
 # procesesarArchivo('xmlEntrada.xml')
+# mostrarLista(listaTerrenos)
+# buscar = input("Ingrese el nombre del terreno seleccionado: ")
+# buscarNodo(listaTerrenos,buscar)
 # filee = open("C:\\Users\\archi\Downloads\Entrada.xml","r")
 # procesesarArchivo(filee)

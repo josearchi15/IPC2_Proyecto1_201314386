@@ -21,6 +21,7 @@ while(True):
         print("Procesando archivo. ")
         print("Terrenos disponibles para procesar:")
         main.mostrarLista(main.listaTerrenos)
+        selecionado = input("Ingrese el nombre del terreno seleccionado: ")
     elif opcion == 3:
         print("\n")
         print("Escribiendo archivo de salida.")
