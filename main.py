@@ -19,7 +19,6 @@ def procesesarArchivo(file):
                 terreno.xf = int(el[0].text)
                 terreno.yf = int(el[1].text)
             else:
-                # print(el.get("x"), el.get("y"),"-->",el.text)
                 terreno.fillTablero(el.get("x"), el.get("y"), int(el.text))
         print(terreno.nombre," ha sido guardado")
         # terreno.showTablero()
@@ -37,8 +36,9 @@ def buscarNodo(lista, nombre):
     actual = lista.cabeza
     while actual != None:
         if actual.dato.nombre == nombre:
-            return print("Encontrado",actual.dato.nombre)
+            return actual.dato
         actual = actual.siguiente
+    print("Terreno no encontrado.")
 
 # procesesarArchivo('xmlEntrada.xml')
 # mostrarLista(listaTerrenos)

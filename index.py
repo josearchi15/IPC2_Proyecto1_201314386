@@ -1,4 +1,5 @@
 import main
+from robot import Robot
 
 
 while(True):
@@ -22,6 +23,9 @@ while(True):
         print("Terrenos disponibles para procesar:")
         main.mostrarLista(main.listaTerrenos)
         selecionado = input("Ingrese el nombre del terreno seleccionado: ")
+        terrenoA = main.buscarNodo(main.listaTerrenos,selecionado)
+        robot = Robot("R2E2",terrenoA)
+        robot.encontrarCamino()
     elif opcion == 3:
         print("\n")
         print("Escribiendo archivo de salida.")
