@@ -76,12 +76,12 @@
 	</terreno>
 		<terreno nombre="terreno3">
 		<posicioninicio>
-			<x>10</x>
-			<y>20</y>
+			<x>5</x>
+			<y>5</y>
 		</posicioninicio>
 		<posicionfin>
-			<x>30</x>
-			<y>40</y>
+			<x>3</x>
+			<y>1</y>
 		</posicionfin>
 		<posicion x="1" y="1">100</posicion>
 		<posicion x="1" y="2">1</posicion>

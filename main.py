@@ -2,14 +2,14 @@ from terreno import Terreno
 from listaSimpleEnlazada import ListaNoOrdenada
 import xml.etree.ElementTree as ET
 
-listaTerrenos = ListaNoOrdenada()
+listaTerrenos = ListaNoOrdenada() #lista simplemente enlazada que contiene los terrenos leidos
 
-def procesesarArchivo(file):
+def procesesarArchivo(file): #metodo para leer xml, constructor(nombre del archivo)
     tree = ET.parse(file)
     root = tree.getroot()
 
-    for terre in root:
-        terreno = Terreno(terre.get("nombre"))
+    for terre in root: #para cada hijo en la etiqueta terrenos
+        terreno = Terreno(terre.get("nombre")) #constructor terreno atributo nombre
 
         for el in terre:
             if el.tag == "posicioninicio":
@@ -22,9 +22,9 @@ def procesesarArchivo(file):
                 terreno.fillTablero(el.get("x"), el.get("y"), int(el.text))
         print(terreno.nombre," ha sido guardado")
         # terreno.showTablero()
-        listaTerrenos.agregar(terreno)
+        listaTerrenos.agregar(terreno) #guardo terreno en la lista enlazada
 
-def mostrarLista(lista):
+def mostrarLista(lista): #metodo para mostrar cada terreno en la lista enlazada
     actual = lista.cabeza
     index = 1
     while actual != None:
@@ -32,7 +32,7 @@ def mostrarLista(lista):
         index += 1
         actual = actual.siguiente
 
-def buscarNodo(lista, nombre):
+def buscarNodo(lista, nombre): #metedo para devolver el objeto terreno encontrado en una lista enlazada
     actual = lista.cabeza
     while actual != None:
         if actual.dato.nombre == nombre:

@@ -26,6 +26,7 @@ while(True):
         terrenoA = main.buscarNodo(main.listaTerrenos,selecionado)
         robot = Robot("R2E2",terrenoA)
         robot.encontrarCamino()
+        robot.tableroResuelto()
     elif opcion == 3:
         print("\n")
         print("Escribiendo archivo de salida.")
