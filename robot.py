@@ -13,7 +13,7 @@ class Robot:
             self.listaVertices[str("x"+ point["x"]+"y"+point["y"])] = point["value"]  #devuelco una lista con los objetos {clave,consumo}
 
     def setVerticesAdyacentes(self):  #para cada punto verifico si tienen puntos adyacentes arriba,abajo,derecha y izquierda
-        dims = self.terreno.size()
+        dims = self.terreno.size(self.terreno.tablero)
         for point in self.terreno.tablero:
             adyacentes = {}
             x = int(point["x"])
@@ -35,8 +35,8 @@ class Robot:
             self.listaDeAdyacencia[p]=adyacentes      #los guardo en la lista de adyacencia de la manera {clave{adyacentes}}
         # return print(listaDeAdyacencia)
 
-    def checkTypees(self):
-        for point in self.terreno.tablero:
+    def checkTypees(self, tablero):
+        for point in tablero:
             print(type(point["x"]), type(point["y"]), type(point["value"]))
 
     def encontrarCamino(self):
@@ -51,7 +51,8 @@ class Robot:
 
     def tableroResuelto(self):
         gasRuta = self.encontrarCamino()
-        nuevoTablero = self.listaVertices
+        nuevoTablero = self.listaVertices.copy()
+
         for punto in nuevoTablero:
             if punto not in gasRuta["Ruta"]:
                 nuevoTablero[punto] = 0
@@ -63,6 +64,11 @@ class Robot:
             x = clave[1].split("y")[0]
             y = clave[1].split("y")[1]
             tablero01.append({"x":x,"y":y,"value":nuevoTablero[point]})
+            if nuevoTablero[point]== 1:
+                self.terreno.tableroXML.append({"x":x,"y":y,"value":self.listaVertices[point]})
 
-        self.terreno.tablero = tablero01
-        self.terreno.showTablero()
+        self.terreno.tableroResuelto = tablero01
+        self.terreno.showTablero(self.terreno.tablero)
+        print("-------------------")
+        self.terreno.showTablero(self.terreno.tableroResuelto)
+        print(str(self.terreno.tableroXML))
