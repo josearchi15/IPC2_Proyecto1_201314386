@@ -55,6 +55,8 @@ class Robot:
         for punto in nuevoTablero:
             if punto not in gasRuta["Ruta"]:
                 nuevoTablero[punto] = 0
+            else:
+                nuevoTablero[punto] = 1
         tablero01 = list()
         for point in nuevoTablero:
             clave = point.split("x")
@@ -62,16 +64,5 @@ class Robot:
             y = clave[1].split("y")[1]
             tablero01.append({"x":x,"y":y,"value":nuevoTablero[point]})
 
-        print(tablero01)
-        # self.terreno.showTablero()
-        
-        # dims = self.terreno.size()
-
-        # for y in range(int(dims["y"]),0,-1):
-        #     lineX ="| "
-        #     for x in range(1,int(dims["x"])+1,1):
-        #         for point in tablero01:
-        #             if point["x"]==str(x) and point["y"]==str(y):
-        #                 lineX+= str(self.getPoint(x,y))+" | "
-
-        #     print(lineX)
+        self.terreno.tablero = tablero01
+        self.terreno.showTablero()
