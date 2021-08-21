@@ -40,6 +40,29 @@ def buscarNodo(lista, nombre): #metedo para devolver el objeto terreno encontrad
         actual = actual.siguiente
     print("Terreno no encontrado.")
 
+def archivoSalida(terreno):
+    xml = ET.Element('terreno', nombre=terreno.nombre)
+    pi = ET.SubElement(xml, 'posicioninicio')
+    xi = ET.SubElement(pi, 'x')
+    xi.text = (str(terreno.xi))
+    yi = ET.SubElement(pi, 'y')
+    yi.text = (str(terreno.yi))
+    pf = ET.SubElement(xml, 'posicionfin')
+    xf = ET.SubElement(pf, 'x')
+    xf.text = (str(terreno.xf))
+    yf = ET.SubElement(pf, 'y')
+    yf.text = (str(terreno.yf))
+    combustible = ET.SubElement(xml, 'combustible')
+    combustible.text = str(terreno.combustible)
+    for p in terreno.tableroXML:
+        posicion = ET.SubElement(xml, 'posicion', x=str(p.get("x")), y=str(p.get("y")))
+        posicion.text = (str(p.get("value")))
+
+    myXML = ET.tostring(xml, encoding='unicode')
+    myFileXML = open(str(terreno.nombre)+".xml", "w")
+    myFileXML.write(myXML)
+    print("El archivo fue guardado..!!")
+
 # procesesarArchivo('xmlEntrada.xml')
 # mostrarLista(listaTerrenos)
 # buscar = input("Ingrese el nombre del terreno seleccionado: ")

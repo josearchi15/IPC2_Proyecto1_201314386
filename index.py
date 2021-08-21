@@ -22,7 +22,7 @@ while(True):
         print("Procesando archivo. ")
         print("Terrenos disponibles para procesar:")
         main.mostrarLista(main.listaTerrenos)
-        selecionado = input("Ingrese el nombre del terreno seleccionado: ")
+        selecionado = input("Ingrese el nombre del terreno seleccionado: \n")
         terrenoA = main.buscarNodo(main.listaTerrenos,selecionado)
         robot = Robot("R2E2",terrenoA)
         robot.encontrarCamino()
@@ -30,6 +30,11 @@ while(True):
     elif opcion == 3:
         print("\n")
         print("Escribiendo archivo de salida.")
+        print("Terrenos disponibles:")
+        main.mostrarLista(main.listaTerrenos)
+        selecionado = input("Ingrese el nombre del terreno seleccionado: \n")
+        terrenoB = main.buscarNodo(main.listaTerrenos,selecionado)
+        main.archivoSalida(terrenoB)
     elif opcion == 4:
         print("\n")
         print("Jose Carlos Archila Galicia")

@@ -8,6 +8,7 @@ class Terreno:
         self.tablero = list()
         self.tableroResuelto = list()
         self.tableroXML = list()
+        self.combustible = 0
 
     def fillTablero(self, x, y, value):
         self.tablero.append({
@@ -31,7 +32,10 @@ class Terreno:
 
     def showTablero(self, tablero):
         dims = self.size(tablero)
-        print("Punto inicial: x",self.xi," y:",self.yi," gas: ",self.getPoint(tablero, self.xi,self.yi))
+        # print("Punto inicial: x",self.xi," y:",self.yi," gas: ",self.getPoint(tablero, self.xi,self.yi))
+        print("\n Punto inicial: x: ",self.xi," y: ",self.yi)
+        print("\n Punto final: x: ",self.xf," y: ",self.yf)
+
 
         for y in range(int(dims["y"]),0,-1):
             lineX ="| "

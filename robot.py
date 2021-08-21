@@ -47,6 +47,7 @@ class Robot:
         resultado = dijkstra(self.listaDeAdyacencia, inicio, final) #opero dijkstra y me devuelve un objeto {distancia,ruta}
         distanciaTotal = self.listaVertices[inicio]+resultado["distancia"] #a la distancia devuelta le sumo el consumo del punto inicial
         # return print("Combustible utilizado: ",str(distanciaTotal),"\n Ruta: ",str(resultado["ruta"])) 
+        self.terreno.combustible = str(distanciaTotal)
         return {"Combustible": distanciaTotal,"Ruta":resultado["ruta"]}
 
     def tableroResuelto(self):
@@ -68,7 +69,8 @@ class Robot:
                 self.terreno.tableroXML.append({"x":x,"y":y,"value":self.listaVertices[point]})
 
         self.terreno.tableroResuelto = tablero01
-        self.terreno.showTablero(self.terreno.tablero)
+        # self.terreno.showTablero(self.terreno.tablero)
         print("-------------------")
         self.terreno.showTablero(self.terreno.tableroResuelto)
-        print(str(self.terreno.tableroXML))
+        print("Combustible consumido: ", gasRuta.get("Combustible"))
+        # print(str(self.terreno.tableroXML))
