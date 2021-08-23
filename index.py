@@ -45,5 +45,10 @@ while(True):
     elif opcion == 5:
         print("\n")
         print("Generando grafica")
+        print("Terrenos disponibles:")
+        main.mostrarLista(main.listaTerrenos)
+        selecionado = input("Ingrese el nombre del terreno seleccionado: \n")
+        terrenoC = main.buscarNodo(main.listaTerrenos,selecionado)
+        main.generarGrafica(terrenoC)
     else:
         break

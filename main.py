@@ -1,6 +1,8 @@
 from terreno import Terreno
+from robot import Robot
 from listaSimpleEnlazada import ListaNoOrdenada
 import xml.etree.ElementTree as ET
+from graphviz import Graph
 
 listaTerrenos = ListaNoOrdenada() #lista simplemente enlazada que contiene los terrenos leidos
 
@@ -62,6 +64,34 @@ def archivoSalida(terreno):
     myFileXML = open(str(terreno.nombre)+".xml", "w")
     myFileXML.write(myXML)
     print("El archivo fue guardado..!!")
+
+
+def generarGrafica(terreno):
+    r2e2 = Robot("R2E2", terreno)
+    r2e2.setVertices()
+    r2e2.setVerticesAdyacentes()
+    xy = terreno.size(terreno.tablero)
+
+
+    grafica = Graph(comment=terreno.nombre)
+    grafica.attr('graph', rankdir='LR', label=terreno.nombre)
+    for p in r2e2.listaVertices:
+        grafica.node(p, str(r2e2.listaVertices[p]))
+
+    for vertice in r2e2.listaDeAdyacencia:
+        for ady in r2e2.listaDeAdyacencia[vertice]:
+            grafica.edge(vertice, ady)
+
+    myDot = grafica.source
+    dotFile = open("prueba.txt","w")
+    dotFile.write(myDot)
+
+
+
+    grafica.render("prueba", format="png", view=True)
+
+
+
 
 # procesesarArchivo('xmlEntrada.xml')
 # mostrarLista(listaTerrenos)
