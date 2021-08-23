@@ -1,3 +1,4 @@
+from listaSimpleEnlazada import ListaNoOrdenada
 from dijkstra import dijkstra
 
 class Robot:
@@ -6,41 +7,45 @@ class Robot:
         self.terreno = terreno
         self.listaVertices = {}
         self.listaDeAdyacencia = {}
-        
-    
-    def setVertices(self):   #tomo la lista de puntos {x,y,value} y las convierto en vertices {clave,consumo}
-        for point in self.terreno.tablero:
-            self.listaVertices[str("x"+ point["x"]+"y"+point["y"])] = point["value"]  #devuelco una lista con los objetos {clave,consumo}
+
+
+    def setVericesMatrix(self):
+        actual = self.terreno.matrix.cabeza
+        while actual != None:
+            self.listaVertices[str("x"+ actual.dato["x"]+"y"+actual.dato["y"])] = actual.dato["value"] 
+            actual = actual.siguiente
 
     def setVerticesAdyacentes(self):  #para cada punto verifico si tienen puntos adyacentes arriba,abajo,derecha y izquierda
-        dims = self.terreno.size(self.terreno.tablero)
-        for point in self.terreno.tablero:
+        dims = self.terreno.sizeMatrix()
+
+        actual = self.terreno.matrix.cabeza
+        while actual != None:
             adyacentes = {}
-            x = int(point["x"])
-            y = int(point["y"])
-            p = str("x"+ point["x"]+"y"+point["y"]) #clave
+            x = int(actual.dato["x"])
+            y = int(actual.dato["y"])
+            p = str("x"+ actual.dato["x"]+"y"+actual.dato["y"]) #clave
 
             if x-1>0: #tiene anterior en x
-                anteririorX = str("x"+ str(x-1)+"y"+point["y"])
+                anteririorX = str("x"+ str(x-1)+"y"+actual.dato["y"])
                 adyacentes[anteririorX] = self.listaVertices[anteririorX]
             if x+1<= dims["x"]: #tiene siguiente en x
-                siguienteX = str("x"+ str(x+1)+"y"+point["y"])
+                siguienteX = str("x"+ str(x+1)+"y"+actual.dato["y"])
                 adyacentes[siguienteX] = self.listaVertices[siguienteX]
             if y-1>0: #tiene anterior en y
-                anteririorY = str("x"+ point["x"]+"y"+str(y-1))
+                anteririorY = str("x"+ actual.dato["x"]+"y"+str(y-1))
                 adyacentes[anteririorY] = self.listaVertices[anteririorY]
             if y+1<= dims["y"]: #tiene siguiente en y
-                siguienteY = str("x"+ point["x"]+"y"+str(y+1))
+                siguienteY = str("x"+ actual.dato["x"]+"y"+str(y+1))
                 adyacentes[siguienteY] = self.listaVertices[siguienteY]
             self.listaDeAdyacencia[p]=adyacentes      #los guardo en la lista de adyacencia de la manera {clave{adyacentes}}
-        # return print(listaDeAdyacencia)
+            actual = actual.siguiente
 
     def checkTypees(self, tablero):
         for point in tablero:
             print(type(point["x"]), type(point["y"]), type(point["value"]))
 
     def encontrarCamino(self):
-        self.setVertices()           #construyo mis vertices {clave,valor}
+        self.setVericesMatrix()          #construyo mis vertices {clave,valor}
         self.setVerticesAdyacentes() #construyo mi lista de adyacencia {clave{adyacentes}}
         inicio = "x"+str(self.terreno.xi)+"y"+str(self.terreno.yi) #obtengo el punto de inicio de mi obj terreno
         final = "x"+str(self.terreno.xf)+"y"+str(self.terreno.yf) #obtengo el punto final de mi objeto terreno
@@ -59,18 +64,21 @@ class Robot:
                 nuevoTablero[punto] = 0
             else:
                 nuevoTablero[punto] = 1
-        tablero01 = list()
+        tablero01 = ListaNoOrdenada()
         for point in nuevoTablero:
             clave = point.split("x")
             x = clave[1].split("y")[0]
             y = clave[1].split("y")[1]
-            tablero01.append({"x":x,"y":y,"value":nuevoTablero[point]})
+            tablero01.agregar({"x":x,"y":y,"value":nuevoTablero[point]})
             if nuevoTablero[point]== 1:
-                self.terreno.tableroXML.append({"x":x,"y":y,"value":self.listaVertices[point]})
+                self.terreno.matrixXML.agregar({"x":x,"y":y,"value":self.listaVertices[point]})
 
-        self.terreno.tableroResuelto = tablero01
-        # self.terreno.showTablero(self.terreno.tablero)
+        self.terreno.matrixResuelta = tablero01
         print("-------------------")
-        self.terreno.showTablero(self.terreno.tableroResuelto)
+        self.terreno.showMatrix(self.terreno.matrixResuelta)
         print("Combustible consumido: ", gasRuta.get("Combustible"))
-        # print(str(self.terreno.tableroXML))
+        # print("Las coordenadas son las siguientes: ")
+        # punto = self.terreno.matrixXML.cabeza
+        # while punto != None:
+        #     print(punto.obtenerDato())
+        #     punto = punto.obtenerSiguiente()

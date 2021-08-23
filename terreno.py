@@ -1,3 +1,4 @@
+from listaSimpleEnlazada import ListaNoOrdenada
 class Terreno:
     def __init__(self, nombre):
         self.nombre = nombre
@@ -5,48 +6,48 @@ class Terreno:
         self.yi = 0
         self.xf = 0
         self.yf = 0
-        self.tablero = list()
-        self.tableroResuelto = list()
-        self.tableroXML = list()
+        self.matrix = ListaNoOrdenada()
+        self.matrixResuelta = ListaNoOrdenada()
+        self.matrixXML = ListaNoOrdenada()
         self.combustible = 0
 
-    def fillTablero(self, x, y, value):
-        self.tablero.append({
+
+
+    def fillMatrix(self, x, y, value):
+        self.matrix.agregar({
             "x":x,
             "y":y,
             "value":value
         })
 
-    def size(self, tablero):
-        dimensions = {
-            "x":0,
-            "y":0
+    def sizeMatrix(self):
+        actual = self.matrix.cabeza.obtenerDato()
+        size = {
+            "x":int(actual["x"]),
+            "y":int(actual["y"])
         }
-        for dic in tablero:
-            if dic["x"]=="1":
-                dimensions["y"]+=1
-        for dic in tablero:
-            if dic["y"]=="1":
-                dimensions["x"]+=1
-        return dimensions        
 
-    def showTablero(self, tablero):
-        dims = self.size(tablero)
-        # print("Punto inicial: x",self.xi," y:",self.yi," gas: ",self.getPoint(tablero, self.xi,self.yi))
+        return size
+
+    def showMatrix(self, matrix):
+        dims = self.sizeMatrix()
         print("\n Punto inicial: x: ",self.xi," y: ",self.yi)
         print("\n Punto final: x: ",self.xf," y: ",self.yf)
-
 
         for y in range(int(dims["y"]),0,-1):
             lineX ="| "
             for x in range(1,int(dims["x"])+1,1):
-                for point in tablero:
-                    if point["x"]==str(x) and point["y"]==str(y):
-                        lineX+= str(self.getPoint(tablero, x,y))+" | "
+                actual = matrix.cabeza
+                while actual != None:
+                    if actual.dato["x"]==str(x) and actual.dato["y"]==str(y):
+                        lineX+= str(self.getPointMatrix(matrix, x,y))+" | "
+                    actual = actual.siguiente
 
             print(lineX)
 
-    def getPoint(self,tablero, px,py):  #metodo para obtener punto en base a coordenadas
-        for point in tablero:
-            if point["x"]==str(px) and point["y"]==str(py):
-                return point["value"]
+    def getPointMatrix(self, matrix, px, py):
+        actual = matrix.cabeza
+        while actual != None:
+            if int(actual.obtenerDato()["x"])==(px) and int(actual.obtenerDato()["y"])==(py):
+                return actual.obtenerDato()["value"]
+            actual = actual.siguiente

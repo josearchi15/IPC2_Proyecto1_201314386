@@ -21,10 +21,12 @@ def procesesarArchivo(file): #metodo para leer xml, constructor(nombre del archi
                 terreno.xf = int(el[0].text)
                 terreno.yf = int(el[1].text)
             else:
-                terreno.fillTablero(el.get("x"), el.get("y"), int(el.text))
+                # terreno.fillTablero(el.get("x"), el.get("y"), int(el.text))
+                terreno.fillMatrix(el.get("x"), el.get("y"), int(el.text))
         print(terreno.nombre," ha sido guardado")
         # terreno.showTablero()
         listaTerrenos.agregar(terreno) #guardo terreno en la lista enlazada
+        terreno.sizeMatrix()
 
 def mostrarLista(lista): #metodo para mostrar cada terreno en la lista enlazada
     actual = lista.cabeza
@@ -56,9 +58,11 @@ def archivoSalida(terreno):
     yf.text = (str(terreno.yf))
     combustible = ET.SubElement(xml, 'combustible')
     combustible.text = str(terreno.combustible)
-    for p in terreno.tableroXML:
-        posicion = ET.SubElement(xml, 'posicion', x=str(p.get("x")), y=str(p.get("y")))
-        posicion.text = (str(p.get("value")))
+    actual = terreno.matrixXML.cabeza
+    while actual != None:
+        posicion = ET.SubElement(xml, 'posicion', x=str(actual.obtenerDato()["x"]), y=str(actual.obtenerDato()["y"]))
+        posicion.text = str(actual.obtenerDato()["value"])
+        actual = actual.obtenerSiguiente()
 
     myXML = ET.tostring(xml, encoding='unicode')
     myFileXML = open(str(terreno.nombre)+".xml", "w")
@@ -67,28 +71,24 @@ def archivoSalida(terreno):
 
 
 def generarGrafica(terreno):
-    r2e2 = Robot("R2E2", terreno)
-    r2e2.setVertices()
-    r2e2.setVerticesAdyacentes()
-    xy = terreno.size(terreno.tablero)
+    matrixXml = ListaNoOrdenada()
+    actual = terreno.matrix.cabeza
+    size = terreno.sizeMatrix()
+    
+    for y in range(size["y"],0, -1):
+        nivelY = ListaNoOrdenada()
+        while actual != None:
+            if actual.dato["y"] ==str(y):
+                nivelY.agregar(actual.dato)
+            actual = actual.siguiente
+        matrixXml.agregar(nivelY)
+    
+    nivel = matrixXml.cabeza
+    while nivel != None:
+        print(nivel.dato.cabeza)
+        nivel = nivel.siguiente
 
 
-    grafica = Graph(comment=terreno.nombre)
-    grafica.attr('graph', rankdir='LR', label=terreno.nombre)
-    for p in r2e2.listaVertices:
-        grafica.node(p, str(r2e2.listaVertices[p]))
-
-    for vertice in r2e2.listaDeAdyacencia:
-        for ady in r2e2.listaDeAdyacencia[vertice]:
-            grafica.edge(vertice, ady)
-
-    myDot = grafica.source
-    dotFile = open("prueba.txt","w")
-    dotFile.write(myDot)
-
-
-
-    grafica.render("prueba", format="png", view=True)
 
 
 
