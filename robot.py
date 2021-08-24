@@ -51,7 +51,6 @@ class Robot:
         final = "x"+str(self.terreno.xf)+"y"+str(self.terreno.yf) #obtengo el punto final de mi objeto terreno
         resultado = dijkstra(self.listaDeAdyacencia, inicio, final) #opero dijkstra y me devuelve un objeto {distancia,ruta}
         distanciaTotal = self.listaVertices[inicio]+resultado["distancia"] #a la distancia devuelta le sumo el consumo del punto inicial
-        # return print("Combustible utilizado: ",str(distanciaTotal),"\n Ruta: ",str(resultado["ruta"])) 
         self.terreno.combustible = str(distanciaTotal)
         return {"Combustible": distanciaTotal,"Ruta":resultado["ruta"]}
 

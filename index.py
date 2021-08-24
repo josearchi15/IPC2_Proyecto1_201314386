@@ -49,6 +49,7 @@ while(True):
         main.mostrarLista(main.listaTerrenos)
         selecionado = input("Ingrese el nombre del terreno seleccionado: \n")
         terrenoC = main.buscarNodo(main.listaTerrenos,selecionado)
-        terrenoC.showMatrix(terrenoC.matrix)
+        # terrenoC.showMatrix(terrenoC.matrix)
+        main.generarGrafica(terrenoC)
     else:
         break

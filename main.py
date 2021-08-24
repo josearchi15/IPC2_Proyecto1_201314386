@@ -72,25 +72,47 @@ def archivoSalida(terreno):
 
 def generarGrafica(terreno):
     matrixXml = ListaNoOrdenada()
-    actual = terreno.matrix.cabeza
-    size = terreno.sizeMatrix()
-    
-    for y in range(size["y"],0, -1):
-        nivelY = ListaNoOrdenada()
+    dims = terreno.sizeMatrix()
+
+    grafica = Graph()
+    grafica.attr('graph', label=terreno.nombre)
+
+    with grafica.subgraph() as s:
+        s.attr(rank='same')        
+        actual = terreno.matrix.cabeza
         while actual != None:
-            if actual.dato["y"] ==str(y):
-                nivelY.agregar(actual.dato)
-            actual = actual.siguiente
-        matrixXml.agregar(nivelY)
-    
-    nivel = matrixXml.cabeza
-    while nivel != None:
-        print(nivel.dato.cabeza)
-        nivel = nivel.siguiente
+            x = str(actual.obtenerDato()["x"])
+            y = str(actual.obtenerDato()["y"])
+            clave = "x"+x+"y"+y
+            s.node(clave, str(actual.obtenerDato()["value"]))
+            actual = actual.obtenerSiguiente()
 
+    y = dims["y"]
+    x = dims["x"]
+    for yi in range(y,0,-1):
+        y1 = str(yi)
+        y2 = str(yi-1)
+        for xi in range(1,x,1):
+            x1 = str(xi)
+            x2 = str(xi+1)
+            clave1 = "x"+x1+"y"+y1
+            clave2 = "x"+x2+"y"+y1
+            grafica.edge(clave1, clave2)
+        
+    for xi in range(1,x+1,1):
+        x1 = str(xi)
+        for yi in range(1,y,1):
+            y1 = str(yi)
+            y2 = str(yi+1)
+            clave1 = "x"+x1+"y"+y1
+            clave2 = "x"+x1+"y"+y2
+            grafica.edge(clave1, clave2)
+        
 
-
-
+    myDot = grafica.source
+    dotFile = open("prueba.txt","w")
+    dotFile.write(myDot)
+    grafica.render("prueba", format="png", view=True)
 
 
 # procesesarArchivo('xmlEntrada.xml')
