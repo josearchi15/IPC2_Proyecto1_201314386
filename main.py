@@ -71,24 +71,36 @@ def archivoSalida(terreno):
 
 
 def generarGrafica(terreno):
-    matrixXml = ListaNoOrdenada()
-    dims = terreno.sizeMatrix()
+    matrixXml = {}
+    actual = terreno.matrix.cabeza
+    while actual != None:
+        x = str(actual.obtenerDato()["x"])
+        y = str(actual.obtenerDato()["y"])
+        clave = "x"+x+"y"+y
+        matrixXml.update({clave:str(actual.obtenerDato()["value"])})
+        actual = actual.obtenerSiguiente()
 
     grafica = Graph()
     grafica.attr('graph', label=terreno.nombre)
 
-    with grafica.subgraph() as s:
-        s.attr(rank='same')        
-        actual = terreno.matrix.cabeza
-        while actual != None:
-            x = str(actual.obtenerDato()["x"])
-            y = str(actual.obtenerDato()["y"])
-            clave = "x"+x+"y"+y
-            s.node(clave, str(actual.obtenerDato()["value"]))
-            actual = actual.obtenerSiguiente()
-
+    dims = terreno.sizeMatrix()
     y = dims["y"]
     x = dims["x"]
+
+
+    #creamos nodos en subgrafos
+    for nivel in range(y,0,-1):
+	    with grafica.subgraph() as s:
+             s.attr(rank='same')
+             for x in range(1,x+1,1):
+                y1 = str(nivel)
+                x1 = str(x)
+                clave = "x"+x1+"y"+y1
+                s.node(clave, matrixXml[clave])
+
+
+
+    #definicion de edges
     for yi in range(y,0,-1):
         y1 = str(yi)
         y2 = str(yi-1)
