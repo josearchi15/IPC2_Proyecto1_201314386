@@ -39,7 +39,7 @@ while(True):
         print("\n")
         print("Jose Carlos Archila Galicia")
         print("201314386")
-        print("Introducción a la programación y computación 2 sección A")
+        print("Introducción a la programación y computación 2 sección C")
         print("Ingeniería en ciencias y sistemas")
         print("4to semestre")
     elif opcion == 5:
