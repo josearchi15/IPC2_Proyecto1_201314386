@@ -121,10 +121,10 @@ def generarGrafica(terreno):
             grafica.edge(clave1, clave2)
         
 
-    myDot = grafica.source
-    dotFile = open("prueba.txt","w")
-    dotFile.write(myDot)
-    grafica.render("prueba", format="png", view=True)
+    # myDot = grafica.source
+    # dotFile = open("prueba.txt","w")
+    # dotFile.write(myDot)
+    grafica.render(terreno.nombre, format="png", view=True)
 
 
 # procesesarArchivo('xmlEntrada.xml')
